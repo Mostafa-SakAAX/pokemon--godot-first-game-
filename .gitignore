@@ -1,0 +1,7 @@
+.godot/
+*.translation
+.godot/mono/
+*.csproj.html
+*.config
+bin/
+obj/
