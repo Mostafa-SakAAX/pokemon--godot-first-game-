@@ -9,7 +9,7 @@ namespace Game.Gameplay
 		[Signal] public delegate void TurnEventHandler();
 
 		[ExportCategory("Common Inputs")]
-		[Export] public Vector2 Directoin = Vector2.Zero;
+		[Export] public Vector2 Direction = Vector2.Zero;
 		[Export] public Vector2 TargePosition = Vector2.Zero;
 
 	}

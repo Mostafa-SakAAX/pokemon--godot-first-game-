@@ -11,17 +11,17 @@ namespace Game.Core
     {
         idle_down,
         idle_up,
-        idle_righ,
+        idle_right,
         idle_left,
-        
+
         turn_down,
         turn_up,
-        turn_righ,
+        turn_right,
         turn_left,
 
         walk_down,
         walk_up,
-        walk_righ,
+        walk_right,
         walk_left,
 
     }

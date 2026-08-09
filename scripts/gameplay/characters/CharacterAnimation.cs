@@ -16,6 +16,7 @@ namespace Game.Gameplay
 
 		public override void _Ready()
 		{
+			chracterMovement.Animation += PlayAnimation;
 			GameLogger.Info("Loading player animation component ...");
 		}
 
@@ -27,55 +28,55 @@ namespace Game.Gameplay
 			switch (animationType)
 			{
 				case "walk":
-					if (characterInput.Directoin == Vector2.Up)
+					if (characterInput.Direction == Vector2.Up)
 					{
 						ECharacterAnimation = ECharacterAnimation.walk_up;
 					}
-					else if (characterInput.Directoin == Vector2.Down)
+					else if (characterInput.Direction == Vector2.Down)
 					{
 						ECharacterAnimation = ECharacterAnimation.walk_down;
 					}
-					else if (characterInput.Directoin == Vector2.Right)
+					else if (characterInput.Direction == Vector2.Right)
 					{
-						ECharacterAnimation = ECharacterAnimation.walk_righ;
+						ECharacterAnimation = ECharacterAnimation.walk_right;
 					}
-					else if (characterInput.Directoin == Vector2.Left)
+					else if (characterInput.Direction == Vector2.Left)
 					{
 						ECharacterAnimation = ECharacterAnimation.walk_left;
 					}
 					break;
 				case "turn":
-					if (characterInput.Directoin == Vector2.Up)
+					if (characterInput.Direction == Vector2.Up)
 					{
 						ECharacterAnimation = ECharacterAnimation.turn_up;
 					}
-					else if (characterInput.Directoin == Vector2.Down)
+					else if (characterInput.Direction == Vector2.Down)
 					{
 						ECharacterAnimation = ECharacterAnimation.turn_down;
 					}
-					else if (characterInput.Directoin == Vector2.Right)
+					else if (characterInput.Direction == Vector2.Right)
 					{
-						ECharacterAnimation = ECharacterAnimation.turn_righ;
+						ECharacterAnimation = ECharacterAnimation.turn_right;
 					}
-					else if (characterInput.Directoin == Vector2.Left)
+					else if (characterInput.Direction == Vector2.Left)
 					{
 						ECharacterAnimation = ECharacterAnimation.turn_left;
 					}
 					break;
 				case "idle":
-					if (characterInput.Directoin == Vector2.Up)
+					if (characterInput.Direction == Vector2.Up)
 					{
 						ECharacterAnimation = ECharacterAnimation.idle_up;
 					}
-					else if (characterInput.Directoin == Vector2.Down)
+					else if (characterInput.Direction == Vector2.Down)
 					{
 						ECharacterAnimation = ECharacterAnimation.idle_down;
 					}
-					else if (characterInput.Directoin == Vector2.Right)
+					else if (characterInput.Direction == Vector2.Right)
 					{
-						ECharacterAnimation = ECharacterAnimation.idle_righ;
+						ECharacterAnimation = ECharacterAnimation.idle_right;
 					}
-					else if (characterInput.Directoin == Vector2.Left)
+					else if (characterInput.Direction == Vector2.Left)
 					{
 						ECharacterAnimation = ECharacterAnimation.idle_left;
 					}

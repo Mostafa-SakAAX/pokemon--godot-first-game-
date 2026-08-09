@@ -7,7 +7,7 @@ namespace Game.Gameplay
 
 	public partial class CharacterMovement : Node
 	{
-		[Signal] public delegate void AnimationEventHandler();
+		[Signal] public delegate void AnimationEventHandler(string animationType);
 
 		[ExportCategory("Nodes")]
 		[Export] public Node2D Character;
@@ -19,14 +19,18 @@ namespace Game.Gameplay
 
 		public override void _Ready()
 		{
+			CharacterInput.Walk += StartWalking;
+			CharacterInput.Turn += Turn;
+
 			GameLogger.Info("Loading player movement component ...");
 		}
 
 		public override void _Process(double delta)
 		{
+			Walk(delta);
 		}
 
-		public bool IsMoving ()
+		public bool IsMoving()
 		{
 			return IsWalking;
 		}
@@ -35,22 +39,18 @@ namespace Game.Gameplay
 		{
 			if (!IsMoving())
 			{
-				//TODO: Movement Animatoin
-				TargetPosition = Character.Position + CharacterInput.Directoin *Globals.Instance.GRID_SIZE;
-				GameLogger.Info($"Moving from {Character.Position} to {TargetPosition}s");
+				EmitSignal(SignalName.Animation, "walk");
+				TargetPosition = Character.Position + CharacterInput.Direction * Globals.Instance.GRID_SIZE;
+				GameLogger.Info($"Moving from {Character.Position} to {TargetPosition}");
 				IsWalking = true;
 			}
-			else
-			{
-				//TODO: Idle Animation
-			}
 		}
-		
-		public void Walk (double delta)
+
+		public void Walk(double delta)
 		{
 			if (IsWalking)
 			{
-				Character.Position = Character.Position.MoveToward(TargetPosition, (float)delta * Globals.Instance.GRID_SIZE *4);
+				Character.Position = Character.Position.MoveToward(TargetPosition, (float)delta * Globals.Instance.GRID_SIZE * 4);
 
 				if (Character.Position.DistanceTo(TargetPosition) < 1f)
 				{
@@ -58,7 +58,7 @@ namespace Game.Gameplay
 				}
 				else
 				{
-					//TODO: Idle Animation
+					EmitSignal(SignalName.Animation, "idle");
 				}
 			}
 		}
@@ -69,16 +69,16 @@ namespace Game.Gameplay
 			SnapPositoinToGrid();
 		}
 
-		public void turn()
+		public void Turn()
 		{
-			//TODO: Turn Animaion
+			EmitSignal(SignalName.Animation, "turn");
 		}
 
 		public void SnapPositoinToGrid()
 		{
 			Character.Position = new Vector2(
-				Mathf.Round(Character.Position.X / Globals.Instance.GRID_SIZE) *Globals.Instance.GRID_SIZE,
-				Mathf.Round(Character.Position.Y / Globals.Instance.GRID_SIZE) *Globals.Instance.GRID_SIZE
+				Mathf.Round(Character.Position.X / Globals.Instance.GRID_SIZE) * Globals.Instance.GRID_SIZE,
+				Mathf.Round(Character.Position.Y / Globals.Instance.GRID_SIZE) * Globals.Instance.GRID_SIZE
 			);
 		}
 	}

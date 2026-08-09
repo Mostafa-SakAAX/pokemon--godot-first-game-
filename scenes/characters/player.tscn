@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bkgbkuffa2fne"]
 
+[ext_resource type="Script" uid="uid://qc2dfexnsy0o" path="res://scripts/gameplay/characters/Player.cs" id="1_6eyoc"]
 [ext_resource type="Texture2D" uid="uid://b4fxg8q01xnrk" path="res://assets/characters/player.png" id="1_rp718"]
 [ext_resource type="Script" uid="uid://bq3lcypiae3ri" path="res://scripts/gameplay/characters/PlayerInput.cs" id="1_yewv4"]
 [ext_resource type="Script" uid="uid://bu8sdhkkc0mp5" path="res://scripts/gameplay/characters/CharacterMovement.cs" id="2_dyp2m"]
 [ext_resource type="Script" uid="uid://bpf5gmj2a0kl0" path="res://scripts/gameplay/characters/CharacterAnimation.cs" id="4_atpat"]
+[ext_resource type="Script" uid="uid://bgthxpfc4atyi" path="res://scripts/utilities/StateMachine.cs" id="5_atpat"]
+[ext_resource type="Script" uid="uid://dvvy0eriwqern" path="res://scripts/gameplay/characters/states/PlayerRoamState.cs" id="7_eojnx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e12ck"]
 size = Vector2(16, 16)
@@ -267,8 +270,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1675674008]
+[node name="Player" type="CharacterBody2D" unique_id=1675674008 node_paths=PackedStringArray("StateMachine")]
 texture_filter = 1
+script = ExtResource("1_6eyoc")
+StateMachine = NodePath("StateMachine")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=1647861293]
 position = Vector2(8, 8)
@@ -302,6 +307,10 @@ position = Vector2(8, 8)
 target_position = Vector2(0, 16)
 collide_with_areas = true
 
-[node name="StateMachine" type="Node" parent="." unique_id=1383838383]
+[node name="StateMachine" type="Node" parent="." unique_id=1383838383 node_paths=PackedStringArray("Customer")]
+script = ExtResource("5_atpat")
+Customer = NodePath("..")
 
-[node name="Roam" type="Node" parent="StateMachine" unique_id=533427130]
+[node name="Roam" type="Node" parent="StateMachine" unique_id=533427130 node_paths=PackedStringArray("playerInput")]
+script = ExtResource("7_eojnx")
+playerInput = NodePath("../../Input")
