@@ -14,7 +14,7 @@ namespace Game.Core
 		{
 			Instance = this;
 
-			Logger.Info("Loading Globals ...");
+			GameLogger.Info("Loading Globals ...");
 		}
 	}
 }

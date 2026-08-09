@@ -3,7 +3,7 @@ using System;
 
 namespace Game.Core
 {
-    public static class Logger
+    public static class GameLogger
     {
         public static void Log(LogLevel level, params object[] message)
         {
